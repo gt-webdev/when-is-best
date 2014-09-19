@@ -1,0 +1,23 @@
+{
+  "name": "when-is-best",
+  "version": "0.0.1",
+  "description": "\"An awesome webapp that allows people to schedule meeting times.\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gt-webdev/when-is-best.git"
+  },
+  "author": "gt-webdev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gt-webdev/when-is-best/issues"
+  },
+  "homepage": "https://github.com/gt-webdev/when-is-best",
+  "dependencies": {
+    "express": "^4.9.3",
+    "jade": "^1.7.0"
+  }
+}
