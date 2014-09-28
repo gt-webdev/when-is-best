@@ -1,0 +1,72 @@
+html, body
+{
+    margin:0px;
+    padding:0px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#pageWrapper
+{
+    width:900px;
+    margin:0px auto;
+    min-height:500px;
+}
+
+#arrowBody
+{
+    width:400px;
+    height:200px;
+    background-color:#0F0;
+    text-align:center;
+    color:#FFF;
+    margin:30px;
+    margin-top:200px;
+    font-size:30px;
+    position:relative;
+}
+
+#instructionsBlock
+{
+    padding:30px;
+    z-index:100;
+    background-color:#0F0;
+    position:absolute;
+}
+
+#dateSelectionPanel
+{
+    height:140px;
+    width:140px;
+    padding:30px;
+    z-index:99;
+    background-color:#0F0;
+    position:absolute;
+    top:0px;
+    left:200px;
+}
+    #dateSelectionPanel p
+    {
+        padding:0px;
+        margin:0px;
+        margin-bottom:10px;
+    }
+canvas
+{
+    height:500px;
+    width:500px;
+    position:absolute;
+    background-color:#FFF;
+    bottom:-150px;
+    left:500;
+}
+
+#goBlock
+{
+    position:absolute;
+    font-size:60px;
+    top:-25px;
+}
+    #goBlock a
+    {
+        color:orange;
+    }
