@@ -1,0 +1,11 @@
+$(document).ready(function(){
+    $('#arrowBody').mouseover(function(){
+        $("#dateSelectionPanel").animate(
+            {
+                left:400
+            },
+            500,
+            function(){}
+        );
+    });
+});
