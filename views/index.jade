@@ -6,22 +6,9 @@ html
         link(rel='stylesheet', href='/css/landing.css')
         script(type="text/javascript", src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js")
 
-        script(type="text/javascript").
-            //set up date selection box to animate into view//
-            //when user hovers over arrow body//
-            $(document).ready(function(){
-                $('#arrowBody').mouseover(function(){
-                    $("#dateSelectionPanel").animate(
-                        {
-                            left:400
-                        },
-                        500,
-                        function(){}
-                    );
-                });
-            });
-
-    body
+        script(type="text/javascript", src="js/index.js")
+    
+body
         #pageWrapper
             #arrowBody
                 #instructionsBlock.
@@ -39,89 +26,5 @@ html
                     a(href="./selectionPage.html")
                         h3 Go!
 
-            script(type="text/javascript").
+        script(type="text/javascript", src="js/index_animation.js")
 
-                    /** Animates the arrow head into view by moving the
-                      * js canvas into view while iteratively drawing a
-                      * growing circle. Once the canvas is in place,
-                      * we begin drawing a growing triangle (arrow head)
-                      * in the same locaiton. The arrow head overtakes
-                      * growth of the circle. The "Go!" link animates
-                      * into place at the same time, but arrives later.*/
-
-                    var mainCanvas = document.querySelector("#myCanvas");
-                    var mainContext = mainCanvas.getContext("2d");
-
-                    //placeholder for when a date is selected//
-                    $("#dateSelector").change(function(){
-
-                        //animate the block containing the Go! link//
-                        //note the animation time is more than the canvas'//
-                        $("#goBlock").animate(
-                            {left:635}, {}, 40);
-
-                        //move canvas//
-                        $("#myCanvas").animate(
-                            { left:600 },
-                            {
-                                duration:20,
-                                start: function(animation) {
-                                    //start growing the circle//
-                                    var radius = 1;
-                                    var circleDrawInterval = setInterval(function(){
-                                            
-                                            radius += 2;
-
-                                            // draw the circle
-                                            mainContext.beginPath();
-                                            mainContext.arc(0, 75, radius, 0, Math.PI * 2, false);
-                                            mainContext.closePath();
-
-                                            // color in the circle
-                                            mainContext.fillStyle = "#00FF00";
-                                            mainContext.fill();
-
-                                            //stop drawing circle so triangle can overtake it.
-                                            if (radius > 25) {
-                                                clearInterval(circleDrawInterval);
-                                            }
-                                        },20);
-                                },
-
-                                //when the canvas is in place, begin drawing triangle//
-                                complete: function() {
-
-                                    /** size represents the radius from the middle of the
-                                      * shape to the top and bottom corners. It is also used
-                                      * to calculate the width.*/
-                                    var size = 10;
-                                    var triangleDrawInterval = setInterval(function() {
-
-                                        //grow faster than circle;
-                                        size = size+=5;
-
-                                        //tart at top corner,move to rightmost point,//
-                                        //move to bottom and then close the shape.//
-
-                                        mainContext.beginPath();
-                                        mainContext.moveTo(0, mainCanvas.height / 2 - size);
-                                        mainContext.lineTo(size * 2, mainCanvas.height / 2);
-                                        mainContext.lineTo(0, mainCanvas.height / 2 + size);
-                                        mainContext.lineTo(0, mainCanvas.height / 2 - size);
-                                        mainContext.strokeStyle = "green";
-                                        mainContext.stroke();
-                                        mainContext.closePath();
-
-                                        // color in the circle//
-                                        mainContext.fillStyle = "#00FF00";
-                                        mainContext.fill();
-
-                                        //stop drawing once desired size is reached//
-                                        if (size > 74) {
-                                            clearInterval(triangleDrawInterval);
-                                        }
-                                    },20);
-                                }
-                            }
-                        );
-                    });
