@@ -1,0 +1,28 @@
+html
+    head
+        link(rel="stylesheet", href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css")
+        script(type="text/javascript", src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js")
+        script(type="text/javascript", src="//code.jquery.com/ui/1.11.1/jquery-ui.js")
+
+        script.
+            $(document).ready(function() {
+                $(".datepicker").datepicker();
+                $("#addDateButton").click(function () {
+                    $("#currentData").append("date:" + $(".datePicker").val() + " start:" + $("#startTimepicker").val() + " endTime:" + $("#endTimepicker").val() + "<br />");
+                });
+            });
+    body
+        div
+            input(id="addDateButton", type="button", value="AddTimeslot")
+
+            div
+                div
+                    p date:
+                        input(class="datepicker")
+                    p time:
+                        input(class="timepicker", id="startTimepicker")
+                        input(class="timepicker", id="endTimepicker")
+
+        input(id="sendButton", type="button", value="Send Data")
+
+        #currentData

@@ -10,4 +10,8 @@ app.get('/', function(req, res) {
 	res.render('index', {});
 });
 
+app.get('/create-event', function(req, res) {
+	res.render("create_event", {});
+});
+
 app.listen(3000);
