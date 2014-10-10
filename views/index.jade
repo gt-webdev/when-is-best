@@ -5,26 +5,16 @@ html
         link(href="http://fonts.googleapis.com/css?family=Open+Sans", rel="stylesheet", type="text/css")
         link(rel='stylesheet', href='/css/landing.css')
         script(type="text/javascript", src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js")
+        script(type="text/javascript", src="/js/jquery-ui-1.9.2.custom.min.js")
+        script(type="text/javascript", src="/js/index_animation.js")
 
-        script(type="text/javascript", src="js/index.js")
-    
-body
-        #pageWrapper
-            #arrowBody
-                #instructionsBlock.
-                    Compare everyone's schedule at
-                    once to find the best time to
-                    meet.
-                #dateSelectionPanel
-                    p Select Dates
-                    select(id="dateSelector")
-                        option a
-                        option b
-                        option c
-                canvas(id="myCanvas")
-                #goBlock
-                    a(href="./selectionPage.html")
-                        h3 Go!
-
-        script(type="text/javascript", src="js/index_animation.js")
-
+        body
+            #wrapper
+                #instructionsBlock
+                    h1(id="instructions") Compare everyone's schedule at once to find the best time to meet.
+                form(id="calendarTypeRadioButton", action="")
+                    p Weekly
+                        input(id="weeklyRadioSelection", type="radio", name="type", value="Weekly")
+                    p One Time
+                        input(id="oneTimeRadioSelection", type="radio", name="type", value="One Time")
+                #datepickerBlock trestsadsf

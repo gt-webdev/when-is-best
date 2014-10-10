@@ -1,72 +1,57 @@
-html, body
-{
+html, body {
     margin:0px;
     padding:0px;
-    font-family: 'Open Sans', sans-serif;
-}
-
-#pageWrapper
-{
-    width:900px;
-    margin:0px auto;
-    min-height:500px;
-}
-
-#arrowBody
-{
-    width:400px;
-    height:200px;
-    background-color:#0F0;
-    text-align:center;
-    color:#FFF;
-    margin:30px;
-    margin-top:200px;
-    font-size:30px;
-    position:relative;
+    font-family: "Open Sans";
+    background-color: #DDD
 }
 
 #instructionsBlock
 {
-    padding:30px;
-    z-index:100;
-    background-color:#0F0;
-    position:absolute;
+    width:90%;
+    height:100px;
+    margin-top:20px;
+    padding-top:1px;
+    background-color:#EEE;
+    box-shadow: 1.5px 3px 5px #888;
 }
 
-#dateSelectionPanel
+#instructions
 {
-    height:140px;
-    width:140px;
-    padding:30px;
-    z-index:99;
-    background-color:#0F0;
-    position:absolute;
-    top:0px;
-    left:200px;
+    margin-left:14%;
+    margin-right:2%;
+    opacity:.8;
 }
-    #dateSelectionPanel p
-    {
-        padding:0px;
-        margin:0px;
-        margin-bottom:10px;
-    }
-canvas
+
+#wrapper
 {
-    height:500px;
+    margin:0px auto;
+    text-align:center;
+}
+
+#calendarTypeRadioButton
+{
     width:500px;
-    position:absolute;
-    background-color:#FFF;
-    bottom:-150px;
-    left:500;
+    margin: 0px auto;
+    margin-top:50px;
+    padding: 20px;
+    background-color:#EFEFEF;
+    box-shadow: 3px 6px 5px #888;
 }
 
-#goBlock
-{
-    position:absolute;
-    font-size:60px;
-    top:-25px;
-}
-    #goBlock a
+    #calendarTypeRadioButton p
     {
-        color:orange;
+        display:inline;
+        margin:30px;
+        font-size:30px;
     }
+
+#datepickerBlock
+{
+    width:500px;
+    height:100px;
+    margin: 0px auto;
+    margin-top:10px;
+    background-color:#EEE;
+    box-shadow:1.5px 3px 5px #888;
+    display:none;
+}
