@@ -2,7 +2,7 @@ html, body {
     margin:0px;
     padding:0px;
     font-family: "Open Sans";
-    background-color: #DDD
+    background-color: #DDD;
 }
 
 #instructionsBlock
@@ -36,6 +36,8 @@ html, body {
     padding: 20px;
     background-color:#EFEFEF;
     box-shadow: 3px 6px 5px #888;
+    z-index:100;
+    position:relative;
 }
 
     #calendarTypeRadioButton p
@@ -54,4 +56,6 @@ html, body {
     background-color:#EEE;
     box-shadow:1.5px 3px 5px #888;
     display:none;
+    z-index:99;
+    position:relative;
 }
