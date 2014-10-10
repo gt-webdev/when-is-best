@@ -3,15 +3,16 @@ var app = express();
 var fs = require('fs');
 var jade = require('jade');
 
+var router = require('./routes');
+
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'jade');
 
-app.get('/', function(req, res) {
-	res.render('index', {});
+//middleware function for router
+app.use(function(req,res,next){
+    next();
 });
 
-app.get('/create-event', function(req, res) {
-	res.render("create_event", {});
-});
+app.use('/',router);
 
 app.listen(3000);
