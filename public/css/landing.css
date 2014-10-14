@@ -4,6 +4,20 @@ html, body {
     font-family: "Open Sans";
     background-color: #DDD;
 }
+.cyanDarkBackground
+{
+    background-color:#00bcd4
+}
+
+.cyanMedBackground
+{
+    background-color:#4dd0e1;
+}
+
+.yellowLightBackground
+{
+    background-color:#fff9c4;
+}
 
 #instructionsBlock
 {
@@ -11,8 +25,8 @@ html, body {
     height:100px;
     margin-top:20px;
     padding-top:1px;
-    background-color:#EEE;
     box-shadow: 1.5px 3px 5px #888;
+    border-radius: 4px;
 }
 
 #instructions
@@ -34,10 +48,10 @@ html, body {
     margin: 0px auto;
     margin-top:50px;
     padding: 20px;
-    background-color:#EFEFEF;
     box-shadow: 3px 6px 5px #888;
     z-index:100;
     position:relative;
+    border-radius:6px;
 }
 
     #calendarTypeRadioButton p
@@ -53,9 +67,9 @@ html, body {
     height:100px;
     margin: 0px auto;
     margin-top:10px;
-    background-color:#EEE;
     box-shadow:1.5px 3px 5px #888;
     display:none;
     z-index:99;
     position:relative;
+    border-radius: 4px;
 }
