@@ -9,7 +9,10 @@ $(document).ready(function () {
     $("#weeklyRadioSelection").click(function () {
         var $panel = $('#datepickerBlock');
         if ($panel.is(':visible')) {
-            $panel.slideUp("slow");
+            $panel.animate({top:-50}, {queue:false});
+            $panel.slideUp("slow", function () {
+                $panel.css("top", 0);
+            });
         }
     });
 });
