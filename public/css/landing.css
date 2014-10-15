@@ -76,12 +76,6 @@ html, body {
 
 
 
- .datepickerWrapper
-{
-    background:yellow;
-    width:300px;
-    height:200px;
-}
 div.datepickerContent
 {
     width:400px;
