@@ -8,5 +8,5 @@ router.get('/', function(req, res) {
 router.get('/create-event', function(req, res) {
   res.render("create_event", {});
 });
-
+=
 module.exports = router;

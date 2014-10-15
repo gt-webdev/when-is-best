@@ -7,6 +7,15 @@ html
         script(type="text/javascript", src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js")
         script(type="text/javascript", src="/js/jquery-ui-1.9.2.custom.min.js")
         script(type="text/javascript", src="/js/index_animation.js")
+        
+        link(rel="stylesheet", href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css")
+        script(type="text/javascript", src="//code.jquery.com/ui/1.11.1/jquery-ui.js")
+        
+        script.
+            $(document).ready(function() {
+                    $(".datepicker").datepicker();
+                });
+
 
         body(class="yellowLightBackground")
             #wrapper
@@ -17,4 +26,12 @@ html
                         input(id="weeklyRadioSelection", type="radio", name="type", value="Weekly")
                     p One Time
                         input(id="oneTimeRadioSelection", type="radio", name="type", value="One Time")
-                #datepickerBlock(class="cyanDarkBackground") trestsadsf
+                #datepickerBlock(class="cyanDarkBackground")
+                    .datepickerContent
+                        #contentWrapper
+                            p.datepickerContent Start date:
+                            input(class="datepicker")
+                        #contentWrapper
+                            p.datepickerContent End date:
+                            input(class="datepicker")   
+
