@@ -1,28 +1,27 @@
 html
     head
         link(rel="stylesheet", href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css")
+        link(href="http://fonts.googleapis.com/css?family=Open+Sans", rel="stylesheet", type="text/css")
+        link(rel='stylesheet', href='/css/global.css')
+        link(rel='stylesheet', href='/css/create_event.css')
         script(type="text/javascript", src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js")
         script(type="text/javascript", src="//code.jquery.com/ui/1.11.1/jquery-ui.js")
-
-        script.
-            $(document).ready(function() {
-                $(".datepicker").datepicker();
-                $("#addDateButton").click(function () {
-                    $("#currentData").append("date:" + $(".datePicker").val() + " start:" + $("#startTimepicker").val() + " endTime:" + $("#endTimepicker").val() + "<br />");
-                });
-            });
-    body
-        div
-            input(id="addDateButton", type="button", value="AddTimeslot")
-
-            div
-                div
-                    p date:
-                        input(class="datepicker")
-                    p time:
-                        input(class="timepicker", id="startTimepicker")
-                        input(class="timepicker", id="endTimepicker")
-
-        input(id="sendButton", type="button", value="Send Data")
-
-        #currentData
+        - var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    body(class="yellowLightBackground")
+        #sidebar(class="cyanDarkBackground")
+            #hoursSelector
+                p select hours (eventually)
+            #infoBlock
+                p get user info (eventually)
+        #wrapper
+            table
+                tr
+                    each day in days
+                    td= day
+                if weekly
+                - for (var dayIndex = 0; dayIndex < 8; dayIndex++) {
+                td(title="days[dayIndex]", class="dayBlock")
+                    - for (var timeIndex = 0; timeIndex < 49; timeIndex++) {
+                    input()
+                    }
+                }
