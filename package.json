@@ -18,6 +18,7 @@
   "homepage": "https://github.com/gt-webdev/when-is-best",
   "dependencies": {
     "express": "^4.9.3",
-    "jade": "^1.7.0"
+    "jade": "^1.7.0",
+    "mongodb": "^1.4.19"
   }
 }

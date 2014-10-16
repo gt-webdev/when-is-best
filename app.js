@@ -5,6 +5,7 @@ var jade = require('jade');
 var port = process.env.PORT || 3000;
 var db = process.env.MONGOHQ_URI || "mongodb://localhost/whenisbest";
 
+
 var router = require('./routes');
 
 app.use(express.static(__dirname + '/public'));
