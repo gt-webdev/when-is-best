@@ -73,3 +73,23 @@ html, body {
     position:relative;
     border-radius: 4px;
 }
+
+
+
+div.datepickerContent
+{
+    width:400px;
+    height:120px;
+    margin-left:auto;
+    margin-right:auto;
+}
+.datepickerContent
+{
+    margin-top:0;
+    margin-bottom:10px;
+}
+#contentWrapper
+{
+    display:inline-block;
+    margin:20px;
+}
