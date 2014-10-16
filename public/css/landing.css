@@ -93,3 +93,8 @@ div.datepickerContent
     display:inline-block;
     margin:20px;
 }
+
+.goButton
+{
+    margin-top:20px;   
+}
