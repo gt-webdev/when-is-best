@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var fs = require('fs');
 var jade = require('jade');
+var port = process.env.PORT || 3000;
 
 var router = require('./routes');
 
@@ -15,4 +16,5 @@ app.use(function(req,res,next){
 
 app.use('/',router);
 
-app.listen(3000);
+app.listen(port);
+console.log("Hey! You are running on port " + port);
