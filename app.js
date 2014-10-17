@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 var jade = require('jade');
 var port = process.env.PORT || 3000;
-var db = process.env.MONGOHQ_URI || "mongodb://localhost/whenisbest";
+var url = process.env.MONGOHQ_URI || "mongodb://localhost/whenisbest";
 
 
 var router = require('./routes');
@@ -22,3 +22,5 @@ app.use('/',router);
 
 app.listen(port);
 console.log("Hey! You are running on port " + port);
+
+module.exports = app;
