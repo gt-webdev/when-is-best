@@ -2,20 +2,15 @@ var express = require('express');
 var router = express.Router();
 var mongodb = require('mongodb');
 var client = mongodb.MongoClient;
-var url = process.env.MONGOHQ_URI || "mongodb://localhost/whenisbest";
+var url = process.env.MONGOHQ_URL || "mongodb://localhost/whenisbest";
 
-console.log(process.env);
-var insertDocs = function(db,item,callback){
+var insertDocs = function(db,docs,collection,callback){
 
-  console.log(item);
+  var collection = db.collection(collection);
 
-  var collection = db.collection('test');
-
-  collection.insert(item,function(err,result){
+  collection.insert(docs,function(err,result){
     if(err)
       console.log(err);
-    else
-      console.log('success');
 
     callback(result);
   });
@@ -33,19 +28,11 @@ router.post('/create-event', function(req, res) {
   client.connect(url, function(err, db) {
     if(err)
       console.log(err);
-    req.body._id = "123123123123123";
 
-    var test = {
-       _id:"234234",
-       att:"safasdf"
-    }
-
-    insertDocs(db,req.body,function(){
+    insertDocs(db,req.body,'test',function(){
       db.close();
     });
   });
-
-  res.json({"event-id": 1234324});
 });
 
 module.exports = router;

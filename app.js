@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 var jade = require('jade');
 var port = process.env.PORT || 3000;
-var url = process.env.MONGOHQ_URI || "mongodb://localhost/whenisbest";
+var url = process.env.MONGOHQ_URL || "mongodb://localhost/whenisbest";
 
 
 var router = require('./routes');
