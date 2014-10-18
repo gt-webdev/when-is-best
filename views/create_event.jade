@@ -6,7 +6,7 @@ html
         link(rel='stylesheet', href='/css/create_event.css')
         script(type="text/javascript", src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js")
         script(type="text/javascript", src="//code.jquery.com/ui/1.11.1/jquery-ui.js")
-        - var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        script(type="text/javascript", src="/js/create-event/main.js")
     body(class="yellowLightBackground")
         #sidebar(class="cyanDarkBackground")
             #hoursSelector
@@ -16,12 +16,13 @@ html
         #wrapper
             table
                 tr
-                    each day in days
-                    td= day
+                    - var DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                    - for(var dayIndex = 0; dayIndex < 7; dayIndex++)
+                        td(class="dayNameHeader")=DAYS[dayIndex]
                 if weekly
-                - for (var dayIndex = 0; dayIndex < 8; dayIndex++) {
-                td(title="days[dayIndex]", class="dayBlock")
-                    - for (var timeIndex = 0; timeIndex < 49; timeIndex++) {
-                    input()
-                    }
-                }
+                - for (var timeIndex = 0; timeIndex < 24; timeIndex++)
+                    tr(title=timeIndex)
+                    - for (var dayIndex = 0; dayIndex < 7; dayIndex++)
+                        td
+                            input(type="button", value=((timeIndex + 1) + ":00"), wib-day=dayIndex, wib-time=timeIndex, class="timeslot")
+            input(type="button", value="Send To Backend!", id="sendButton")
