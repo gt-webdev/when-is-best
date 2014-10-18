@@ -1,0 +1,19 @@
+html, body {
+    margin:0px;
+    padding:0px;
+    font-family: "Open Sans";
+}
+.cyanDarkBackground
+{
+    background-color:#00bcd4
+}
+
+.cyanMedBackground
+{
+    background-color:#4dd0e1;
+}
+
+.yellowLightBackground
+{
+    background-color:#fff9c4;
+}
