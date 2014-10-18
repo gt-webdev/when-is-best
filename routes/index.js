@@ -25,6 +25,7 @@ router.get('/create-event', function(req, res) {
 });
 
 router.post('/create-event', function(req, res) {
+    console.log(req.body);
   client.connect(url, function(err, db) {
     if(err)
       console.log(err);

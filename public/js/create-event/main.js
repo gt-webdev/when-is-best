@@ -42,13 +42,13 @@ jQuery(function($) {
 				var end = null;
 				for (var i = 0; i < 24; i++) {
 					if (start == null && enabled[i][j]) {
-						start = i;
+						start = i + 1;
 					} else if (start != null && !enabled[i][j]) {
-						end = i - 1;
+						end = i;
 						dateJson.times.push(
 							{
-								"start" : start,
-								"end" : end
+								"start" : start + ":00",
+								"end" : end + ":00"
 							}
 						);
 						start = null;
@@ -58,8 +58,8 @@ jQuery(function($) {
 				if (start != null) {
 					dateJson.times.push(
 						{
-							"start" : "" + start,
-							"end" : "" + enabled.length - 1
+							"start" : "" + start + ":00",
+							"end" : "" + (enabled.length - 1) + ":00"
 						}
 					);
 				}
