@@ -1,30 +1,28 @@
 html
     head
         link(rel="stylesheet", href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css")
+        link(href="http://fonts.googleapis.com/css?family=Open+Sans", rel="stylesheet", type="text/css")
+        link(rel='stylesheet', href='/css/global.css')
+        link(rel='stylesheet', href='/css/create_event.css')
         script(type="text/javascript", src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js")
         script(type="text/javascript", src="//code.jquery.com/ui/1.11.1/jquery-ui.js")
-
-        script.
-            $(document).ready(function() {
-                $(".datepicker").datepicker();
-                $("#addDateButton").click(function () {
-                    $("#currentData").append("date:" + $(".datePicker").val() + " start:" + $("#startTimepicker").val() + " endTime:" + $("#endTimepicker").val() + "<br />");
-                });
-            });
-    body
-        div
-            input(id="addDateButton", type="button", value="AddTimeslot")
-
-            div
-                div
-                    p date:
-                        input(class="datepicker")
-                    p time:
-                        input(class="timepicker", id="startTimepicker")
-                        input(class="timepicker", id="endTimepicker")
-
-        input(id="sendButton", type="button", value="Send Data")
-        input(id="testPost", type="button", value="Test Post")
-        #currentData
-
-        script(type="text/javascript", src="js/create-event/main.js")
+        script(type="text/javascript", src="/js/create-event/main.js")
+    body(class="yellowLightBackground")
+        #sidebar(class="cyanDarkBackground")
+            #hoursSelector
+                p select hours (eventually)
+            #infoBlock
+                p get user info (eventually)
+        #wrapper
+            table
+                tr
+                    - var DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                    - for(var dayIndex = 0; dayIndex < 7; dayIndex++)
+                        td(class="dayNameHeader")=DAYS[dayIndex]
+                if weekly
+                - for (var timeIndex = 0; timeIndex < 24; timeIndex++)
+                    tr(title=timeIndex)
+                    - for (var dayIndex = 0; dayIndex < 7; dayIndex++)
+                        td
+                            input(type="button", value=((timeIndex + 1) + ":00"), wib-day=dayIndex, wib-time=timeIndex, class="timeslot")
+            input(type="button", value="Send To Backend!", id="sendButton")

@@ -1,0 +1,33 @@
+#wrapper
+{
+    margin-left:390px;
+    padding:20px;
+}
+
+#sidebar
+{
+    position:fixed;
+    height:100%;
+    width:350px;
+    padding:20px;
+    box-shadow: 3px 3px 5px #888;
+}
+
+.timeslot
+{
+    margin:30px;
+    margin-bottom:0px;
+    margin-top:5px;
+}
+
+.dayNameHeader
+{
+    padding:30px;
+    padding-bottom:0px;
+    padding-top:5px;
+}
+
+.timeslot
+{
+    border:0px;
+}
