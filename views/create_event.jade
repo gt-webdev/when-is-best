@@ -13,6 +13,9 @@ html
                 p select hours (eventually)
             #infoBlock
                 p get user info (eventually)
+            p #{weekly}
+            if !weekly
+                p dates: #{range.start} and #{range.end}
         #wrapper
             table
                 tr

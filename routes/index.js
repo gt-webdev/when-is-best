@@ -9,9 +9,25 @@ router.get('/', function(req, res) {
   res.render('index', {});
 });
 
+// Requests for creating an event
 router.route('/event/create')
   .get(function(req, res) {
-    res.render('create_event', {});
+    // Parse out options passed in by landing page
+    var eventType = req.query.type;
+
+    if (eventType === "Weekly") {
+      res.render('create_event', { 'weekly': true });
+    }
+    else {
+      res.render('create_event',
+        { 'weekly': false,
+          'range': {
+            start: req.query.startDate,
+            end: req.query.endDate
+          }
+        });
+    }
+
   })
   .post(function(req, res) {
     MongoClient.connect(url, function(err, db) {
