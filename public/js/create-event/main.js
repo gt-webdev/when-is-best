@@ -2,7 +2,7 @@ jQuery(function($) {
 	var services = {
 		post: function(event) {
 			$.ajax({
-				url: "/create-event",
+				url: "/event/create",
 				type: "POST",
 				data: JSON.stringify(utility.getJSON()),
 				dataType: "json",

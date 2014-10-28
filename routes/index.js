@@ -1,39 +1,46 @@
 var express = require('express');
 var router = express.Router();
 var mongodb = require('mongodb');
-var client = mongodb.MongoClient;
+var MongoClient = mongodb.MongoClient;
 var url = process.env.MONGOHQ_URL || "mongodb://localhost/whenisbest";
 
-var insertDocs = function(db,docs,collection,callback){
-
-  var collection = db.collection(collection);
-
-  collection.insert(docs,function(err,result){
-    if(err)
-      console.log(err);
-
-    callback(result);
-  });
-}
 
 router.get('/', function(req, res) {
   res.render('index', {});
 });
 
-router.get('/create-event', function(req, res) {
-  res.render('create_event', {});
-});
+// Requests for creating an event
+router.route('/event/create')
+  .get(function(req, res) {
+    // Parse out options passed in by landing page
+    var eventType = req.query.type;
 
-router.post('/create-event', function(req, res) {
-    console.log(req.body);
-  client.connect(url, function(err, db) {
-    if(err)
-      console.log(err);
+    if (eventType === "Weekly") {
+      res.render('create_event', { 'weekly': true });
+    }
+    else {
+      res.render('create_event',
+        { 'weekly': false,
+          'range': {
+            start: req.query.startDate,
+            end: req.query.endDate
+          }
+        });
+    }
 
-    insertDocs(db,req.body,'test',function(){
-      db.close();
+  })
+  .post(function(req, res) {
+    MongoClient.connect(url, function(err, db) {
+      if(err){
+        console.log('posting error to DB');
+      }
+      db.collection('events').insert(req.body,function(err){
+        if(err){
+          console.log('insert error to DB');
+        }
+      });
     });
+    console.log('POST successful');
   });
-});
 
 module.exports = router;
