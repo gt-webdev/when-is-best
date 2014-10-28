@@ -1,0 +1,69 @@
+html
+    head
+        title TEMP
+        link(rel='stylesheet', href='/css/global.css')
+        link(rel='stylesheet', href='/css/view_event.css')
+
+        script(type="text/javascript", src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js")
+        script(type="text/javascript", src="//code.jquery.com/ui/1.11.1/jquery-ui.js")
+        script(type="text/javascript", src="/js/range_selection.js")
+        script(type="text/javascript").
+            var Response = { NO:0, MAYBE:1, YES:2 };
+            var Manipulating = { NO:0, MOVING:1, RESIZING:2}
+            var manipulating = Manipulating.NO;
+            var id_counter;
+            function getNewId () {
+                id_counter++;
+                return id_counter;
+            };
+            function Timespan(day, startTime, endTime, identifier) {
+                this.day = day;
+                this.startTime = startTime;
+                this.endTime = endTime;
+                this.indentifier = identifier;
+                this.response = Response.NO;
+            }
+            $(document).ready(function () {
+                var datesEnabled = [[]];
+                for (var i = 0; i < 7; i++) {
+                    for (var j = 0; j < 24; j++) {
+                    //    datesEnabled[i][j] = false;
+                    }
+                }
+                var mouseY;
+                var $window = $(window);
+                var blockManipulated = null;
+                var manipulation = Manipulating.NO;
+                function addTimeslot($dayBlock, timeIndex) {
+                    var id = "timespan_" + getNewId();
+                    $(block).append("<div class='timespan' id='" + id + "'></div>");
+                    blockManipulated = $("#" + id);
+                    manipulating = Manipulating.RESIZING;
+                    var time_str = (index + 1) + ":00";
+                    allTimespans.push(new Timespan(0, time_str, time_str, id));
+                }
+                $("#dayBlock").mousemove(function (event) {
+                    mouseY = event.pageY;
+                    if (manipulating = Manipulating.MOVING) {
+                        //blockManipulated.css('top:')
+                    }
+                });
+                $("#dayBlock").mousedown(function () {
+                    //TODO account for different block
+                    alert("block");
+                    return;
+                    var $block = $(this);
+                    var y = (mouseY - $block.offset().top);
+                    var index = Math.floor(y / 32);
+                    if (datesEnabled[0][index]) {
+
+                    }
+                });
+                $(".timeslot").mousedown(function () {
+                alert("timeslot");
+                });
+            });
+    body
+        #dayBlock
+            - for (var i = 1; i < 25; i++)
+                div(class="timeslot", wib-row=i)= i + ":00"

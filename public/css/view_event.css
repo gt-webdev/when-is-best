@@ -1,0 +1,13 @@
+.timeslot
+{
+    height: 30px;
+    border: 1px solid #000;
+    width:100px;
+}
+
+#dayBlock
+{
+    width:102px;
+    margin-left:100px;
+    background-color:#EEE;
+}
