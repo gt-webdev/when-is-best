@@ -9,5 +9,15 @@
 {
     width:102px;
     margin-left:100px;
+    margin-top:100px;
     background-color:#EEE;
+    position: relative;
+}
+
+.timespan
+{
+    width:100px;
+    position:absolute;
+    min-height:32px;
+    background-color: red;
 }
