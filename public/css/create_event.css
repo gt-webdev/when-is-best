@@ -31,3 +31,19 @@
 {
     border:0px;
 }
+
+
+
+.sidebarText
+{
+    background:none;
+    border:0;
+    outline:none;
+    font-size:20px;
+    color:#555555;
+    opacity:0.8;
+    font-family: "Open Sans";
+    overflow: hidden;
+    resize: none;
+    margin:0;
+}
