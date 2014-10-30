@@ -2,10 +2,10 @@ var express = require('express');
 var router = express.Router();
 var mongodb = require('mongodb');
 var MongoClient = mongodb.MongoClient;
+var config = require('../config');
 var url = process.env.MONGOHQ_URL || "mongodb://localhost/whenisbest";
 var mandrill = require('mandrill-api/mandrill');
-var mandrill_key = process.env.API_KEY || "Vft8M4IwFNwKV_iRYRlORw"
-var mandrill_client = new mandrill.Mandrill(mandrill_key);
+var mandrill_client = new mandrill.Mandrill(config.mandrill_api_key);
 
 router.get('/', function(req, res) {
   res.render('index', {});
@@ -32,7 +32,7 @@ router.route('/event/create')
 
   })
   .post(function(req, res) {
-    MongoClient.connect(url, function(err, db) {
+    MongoClient.connect(config.mongo.url, function(err, db) {
       if(err){
         console.log('posting error to DB');
       }
