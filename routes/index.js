@@ -4,6 +4,7 @@ var mongodb = require('mongodb');
 var MongoClient = mongodb.MongoClient;
 var url = process.env.MONGOHQ_URL || "mongodb://localhost/whenisbest";
 var mandrill = require('mandrill-api/mandrill');
+var mandrill_key = process.env.API_KEY || "Vft8M4IwFNwKV_iRYRlORw"
 var mandrill_client = new mandrill.Mandrill(mandrill_key);
 
 router.get('/', function(req, res) {
@@ -44,8 +45,6 @@ router.route('/event/create')
     console.log('POST successful');
   });
 
-
-
 router.get('/mail', function(req, res) {
     var message = {
         "html": "<p>Example HTML content</p>",
@@ -64,6 +63,10 @@ router.get('/mail', function(req, res) {
     mandrill_client.messages.send({"message": message}, function(result) {
         console.log(result);
     });
+});
+
+router.get('/view-event', function(req, res) {
+    res.render('view_event', {});
 });
 
 module.exports = router;

@@ -21,13 +21,6 @@ app.use(function(req,res,next){
 
 app.use('/',router);
 
-// catch 404
-app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    console.log(err);
-});
-
 app.listen(port);
 console.log("Hey! You are running on port " + port);
 
