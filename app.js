@@ -5,6 +5,7 @@ var fs = require('fs');
 var jade = require('jade');
 var port = process.env.PORT || 3000;
 var url = process.env.MONGOHQ_URL || "mongodb://localhost/whenisbest";
+var mandrill_key = process.env.API_KEY || "Vft8M4IwFNwKV_iRYRlORw"
 
 
 var router = require('./routes');
@@ -20,7 +21,7 @@ app.use(function(req,res,next){
 
 app.use('/',router);
 
-// catch 404 
+// catch 404
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
