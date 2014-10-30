@@ -6,6 +6,7 @@ var ObjectID = mongodb.ObjectID;
 var config = require('../config');
 var mandrill = require('mandrill-api/mandrill');
 var mandrill_client = new mandrill.Mandrill(config.mandrill_api_key);
+var moment = require('moment');
 
 router.get('/', function(req, res) {
   res.render('index', {});
@@ -72,7 +73,7 @@ router.get('/mail', function(req, res) {
 });
 
 router.get('/view-event', function(req, res) {
-    res.render('view_event', {});
+    res.render('view_event', {'moment' : moment});
 });
 
 module.exports = router;
