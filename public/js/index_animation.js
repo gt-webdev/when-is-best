@@ -1,36 +1,26 @@
 $(document).ready(function () {
-    
+
     function dropDown() {
-        var $panel = $('#datepickerBlock');
-        if (!$panel.is(':visible')) {
-            $panel.slideDown("slow", "easeOutBounce");
-        }
+        $('#range').collapse('show');
     }
     
-    $("#oneTimeRadioSelection").click(
-        dropDown
-    );
+    $("#oneTimeRadioSelection").click(dropDown);
     
     if ($("#oneTimeRadioSelection").is(":checked")) {
         dropDown();
     }
     
     function slideUp() {
-        var $panel = $('#datepickerBlock');
-        if ($panel.is(':visible')) {
-            $panel.animate({top:-50}, {queue:false});
-            $panel.slideUp("slow", function () {
-                $panel.css("top", 0);
-            });
+        var elem = $('#range');
+        if (elem.is('.collapse.in')) {
+            $('#range').collapse('hide');
         }
     }
     
-    $("#weeklyRadioSelection").click(
-        slideUp
-    );
+    $("#weeklyRadioSelection").click(slideUp);
     
     if ($("#weeklyRadioSelection").is(":checked")) {
-        dropDown();
+        slideUp();
     }
     
 });
