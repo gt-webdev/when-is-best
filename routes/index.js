@@ -43,4 +43,8 @@ router.route('/event/create')
     console.log('POST successful');
   });
 
+router.get('/view-event', function(req, res) {
+    res.render('view_event', {});
+});
+
 module.exports = router;
