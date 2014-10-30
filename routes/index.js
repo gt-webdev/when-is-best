@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 var mongodb = require('mongodb');
 var MongoClient = mongodb.MongoClient;
+var ObjectID = mongodb.ObjectID;
 var config = require('../config');
-var url = process.env.MONGOHQ_URL || "mongodb://localhost/whenisbest";
 var mandrill = require('mandrill-api/mandrill');
 var mandrill_client = new mandrill.Mandrill(config.mandrill_api_key);
 
@@ -36,10 +36,16 @@ router.route('/event/create')
       if(err){
         console.log('posting error to DB');
       }
+      var newId = new ObjectID();
+      req.body._id =  newId;
+
       db.collection('events').insert(req.body,function(err){
         if(err){
           console.log('insert error to DB');
         }
+        res.json({
+          "event-id": newId
+        });
       });
     });
     console.log('POST successful');
