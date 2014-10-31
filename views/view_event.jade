@@ -28,7 +28,15 @@ html
                 return "timespan_" + _id;
             }
 
+            var test = false;
 
+            var ACTION_NONE = 0;
+            var ACTION_RESIZE_TOP = 1;
+            var ACTION_RESIZE_BOTTOM = 2;
+            var ACTION_MOVE = 3;
+            var ACTION_PAINT = 4;
+            var action = ACTION_NONE;
+            var timespanManipulating = null;
 
             function Timespan($dayBlock, startTime, endTime, identifier) {
                 this.day = $dayBlock.attr("wib-col");
@@ -36,52 +44,64 @@ html
                 this.endTime = endTime;
                 this.indentifier = identifier;
                 this.$dayBlock = $dayBlock;
+                var thisRef = this;
 
                 var html = "<div class='timespan' id='" + identifier
-                        + "'></div>";
+                        + "'><div class='timespanTop' />"
+                        + "<div class='timespanBottom' /></div>";
                 $dayBlock.append(html);
                 var jQueryObject = $("#" + identifier);
+
+                var $topResizer = $("#" + identifier + " .timespanTop");
+                var $bottomResizer = $("#" + identifier + " .timespanBottom");
+                $topResizer.mousedown(function (event) {
+                    action = ACTION_RESIZE_TOP;
+                    timespanManipulating = thisRef;
+                    mousey = event.pageY;
+                    event.stopPropagation();
+                });
+                $bottomResizer.mousedown(function (event) {
+                    action = ACTION_RESIZE_BOTTOM;
+                    timespanManipulating = thisRef;
+                    mousey = event.pageY;
+                    event.stopPropagation();
+                });
+
+                jQueryObject.mousedown(function (event) {
+                    action = ACTION_MOVE;
+                    timespanManipulating = thisRef;
+                    mouseY = event.pageY;
+                    event.stopPropagation();
+                });
 
                 jQueryObject.css("top", getPixelOffset(startTime));
                 jQueryObject.css("height", getPixelInterval(startTime, endTime));
 
-                var lastMouseY = 0;
-                var mouseIsDown = false;
-                jQueryObject.mousedown(function (event) {
-                    mouseIsDown = true;
-                    event.stopPropagation();
-                    lastMouseY = event.pageY;
-                    console.log("down " + mouseY);
-                });
-
-                jQueryObject.mousemove(function (event) {
-                    if (mouseIsDown) {
-                        move(event.pageY - lastMouseY);
-                        lastMouseY = event.pageY;
-                    } else {
-                        lastMouseY = event.pageY;
-                    }
-                    event.stopPropagation();
-                });
-
-                jQueryObject.mouseup(function (event) {
-                    mouseIsDown = false;
-                    snap();
-                });
-
-                this.resize = function (mouseY) {
+                this.paint = function (y) {
                     var topOffset = jQueryObject.offset().top;
-                    if (mouseY > topOffset + jQueryObject.height()) {
-                        jQueryObject.height(mouseY - topOffset);
-                    } else if (mouseY < topOffset) {
-                        var change = topOffset - mouseY;
-                        jQueryObject.css("top", parseInt(jQueryObject.css("top")) - change);
-                        jQueryObject.height( jQueryObject.height()
-                                + change);
+                    if (y > topOffset + jQueryObject.height()) {
+                        jQueryObject.height(y - topOffset);
+                    } else if (y < topOffset) {
+                        var change = topOffset - y;
+                        jQueryObject.css("top", "-=" + change);
+                        jQueryObject.height(jQueryObject.height() + change);
                     }
                 }
 
-                var move = function (change) {
+                this.resizeTop = function (mouseY) {
+                    var change = jQueryObject.offset().top - mouseY;
+                    jQueryObject.css("top", "-=" + change);
+                    jQueryObject.height(jQueryObject.height() + change);
+                    console.log("resizeTop");
+                }
+
+                this.resizeBottom = function (mouseY) {
+                    console.log("resizeBottom");
+                    jQueryObject.height(mouseY - jQueryObject.offset().top);
+                }
+
+                this.move = function (change) {
+                    console.log("move");
                     jQueryObject.css("top", "+=" + change);
                 }
 
@@ -103,15 +123,12 @@ html
 
                 //keep browser from highlighting text//
                 var mouseDown = false;
-                $("#dayBlock").on('mousedown touchstart', function(event) {
+                $(".dayBlock").on('mousedown touchstart', function(event) {
                     event.preventDefault();
                     mouseDown = true;
                 });
-                $("#dayBlock").on('mousemove touchmove', function(event) {
+                $(".dayBlock").on('mousemove touchmove', function(event) {
                     event.preventDefault();
-                    if(mouseDown) {
-                        // Do something here.
-                    }
                 });
                 $(window.document).on('mouseup touchend', function(event) {
                     // Capture this event anywhere in the document, since the
@@ -123,35 +140,44 @@ html
                 //keeps track of active timespan objects//
                 var timespans = [];
 
-                //timespan currently being manipulated, or null//
-                var timespanTracking = null;
 
-                $("#dayBlock").mousemove(function (event) {
-                    mouseY = event.pageY;
-                    if (timespanTracking != null) {
-                        timespanTracking.resize(mouseY);
+                $(".dayBlock").mousemove(function (event) {
+                    if (timespanManipulating != null) {
+                        if (action == ACTION_RESIZE_TOP) {
+                            timespanManipulating.resizeTop(event.pageY);
+                        } else if (action == ACTION_RESIZE_BOTTOM) {
+                            timespanManipulating.resizeBottom(event.pageY);
+                        } else if (action == ACTION_MOVE) {
+                            timespanManipulating.move(event.pageY - mouseY);
+                        } else if (action == ACTION_PAINT) {
+                            timespanManipulating.paint(event.pageY);
+                        }
                     }
+                    mouseY = event.pageY;
                 });
 
                 $(".timeslot").mousedown(function () {
                     var timeslotId = getNewId();
-                    var $dayBlock = $("#dayBlock");
+                    var $dayBlock = $("#dayBlock_" + $(this).attr("wib-col"));
                     var startIndex = getTimeslotIndex(mouseY, $dayBlock);
                     var timespan = new Timespan($dayBlock, startIndex,
                             startIndex + 1, timeslotId);
-                    timespanTracking = timespan;
+                    timespanManipulating = timespan;
+                    action = ACTION_PAINT;
                     timespans.push(timespan);
                 });
 
                 $("body").mouseup(function () {
-                    if ( timespanTracking != null) {
-                        timespanTracking.externalSnap();
+                    if ( timespanManipulating != null) {
+                        timespanManipulating.externalSnap();
                     }
-                    timespanTracking = null;
+                    action = ACTION_NONE;
+                    timespanManipulating = null;
                 });
 
             });
     body
-        #dayBlock()
-            - for (var i = 1; i < 25; i++)
-                div(class="timeslot", wib-row=i, wib-col=0)= i + ":00"
+        - for (var i = 0; i < 7; i++)
+            div(class="dayBlock", id="dayBlock_" + i)
+                - for (var j = 1; j < 25; j++)
+                    div(class="timeslot", wib-row=j, wib-col=i)= j + ":00"
