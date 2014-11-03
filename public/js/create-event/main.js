@@ -101,7 +101,7 @@ jQuery(function($) {
 	});
     
     //SIDEBAR TEXTBOXES AUTOSIZE AND AUTOFILL
-    $('#name').autosize();
+    $('.sidebarText').autosize();
     
     var cssNameFill = {"opacity":1,"color":"#000000"};
     var cssNameEmpty = {"opacity":0.8,"color":"#555555"};
@@ -125,6 +125,15 @@ jQuery(function($) {
             break;
         case "email":
             textValue = "your email";
+            break;
+        case "title":
+            textValue = "event title";
+            break;
+        case "description":
+            textValue = "event description";
+            break;
+        case "emailInvite":
+            textValue = "invite email";
             break;
         }
         if ($(this).val() == '') {
