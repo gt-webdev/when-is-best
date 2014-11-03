@@ -21,6 +21,13 @@ html
                         textarea(name="title", id="title", class="sidebarText", maxlength="75") event title
                         textarea(name="description", id="description", class="sidebarText", maxlength="1000") event description
                         textarea(id="emailInvite", class="sidebarText", maxlength="1000") invite email
+            #hoursSelector
+                p select hours (eventually)
+            #infoBlock
+                p get user info (eventually)
+            p #{weekly}
+            if !weekly
+                p dates: #{range.start} and #{range.end}
         #wrapper
             table
                 tr

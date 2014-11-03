@@ -2,104 +2,21 @@ html, body {
     margin:0px;
     padding:0px;
     font-family: "Open Sans";
-    background-color: #DDD;
-}
-.cyanDarkBackground
-{
-    background-color:#00bcd4
 }
 
-.cyanMedBackground
-{
-    background-color:#4dd0e1;
+.jumbotron {
+    text-align: center;
+    background-color: transparent;
 }
 
-.yellowLightBackground
-{
-    background-color:#fff9c4;
+.selections{
+    text-align: center;
 }
 
-#instructionsBlock
-{
-    width:90%;
-    height:100px;
-    margin-top:20px;
-    padding-top:1px;
-    box-shadow: 1.5px 3px 5px #888;
-    border-radius: 4px;
-}
-
-#instructions
-{
-    margin-left:14%;
-    margin-right:2%;
-    opacity:.8;
-}
-
-#wrapper
-{
-    margin:0px auto;
-    text-align:center;
-}
-
-#calendarTypeRadioButton
-{
-    width:500px;
-    margin: 0px auto;
-    margin-top:50px;
-    padding: 20px;
-    box-shadow: 3px 6px 5px #888;
-    z-index:100;
-    position:relative;
-    border-radius:6px;
-}
-
-    #calendarTypeRadioButton p
-    {
-        display:inline;
-        margin:30px;
-        font-size:30px;
-    }
-
-#datepickerBlock
-{
-    width:500px;
-    height:100px;
-    margin: 0px auto;
-    margin-top:10px;
-    box-shadow:1.5px 3px 5px #888;
-    display:none;
-    z-index:99;
-    position:relative;
-    border-radius: 4px;
-}
-
-div.datepickerContent
-{
-    width:400px;
-    height:120px;
-    margin-left:auto;
-    margin-right:auto;
-}
-
-.datepickerContent
-{
-    margin-top:0;
-    margin-bottom:10px;
-}
-
-.datepicker
-{
-    width:150px;
-}
-
-#contentWrapper
-{
-    display:inline-block;
-    margin:20px;
-}
-
-.goButton
-{
-    margin-top:20px;   
+#goButtonArea {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-align: center;
 }

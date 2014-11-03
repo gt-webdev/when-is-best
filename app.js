@@ -3,8 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var jade = require('jade');
-var port = process.env.PORT || 3000;
-var url = process.env.MONGOHQ_URL || "mongodb://localhost/whenisbest";
+var config = require('./config');
 
 
 var router = require('./routes');
@@ -20,7 +19,7 @@ app.use(function(req,res,next){
 
 app.use('/',router);
 
-app.listen(port);
-console.log("Hey! You are running on port " + port);
+app.listen(config.port);
+console.log("Hey! You are running on port " + config.port);
 
 module.exports = app;

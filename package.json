@@ -20,6 +20,8 @@
     "body-parser": "^1.9.0",
     "express": "^4.9.3",
     "jade": "^1.7.0",
+    "mandrill-api": "1.0.41",
+    "moment": "^2.8.3",
     "mongodb": "^1.4.19"
   }
 }

@@ -2,8 +2,14 @@ html
     head
         title When Is Best -- Scheduling Optimized
 
+        link(rel="stylesheet", href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css")
+
+        <!-- Optional theme -->
+        //- link(rel="stylesheet", href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/lumen/bootstrap.min.css")
 
         script(type="text/javascript", src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js")
+        <!-- Latest compiled and minified JavaScript -->
+        script(src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js")
         script(type="text/javascript", src="/js/jquery-ui-1.9.2.custom.min.js")
         script(type="text/javascript", src="/js/index_animation.js")
 
@@ -15,28 +21,41 @@ html
                     $(".datepicker").datepicker();
             });
         link(href="http://fonts.googleapis.com/css?family=Open+Sans", rel="stylesheet", type="text/css")
-        link(rel='stylesheet', href='/css/global.css')
+        //link(rel='stylesheet', href='/css/global.css')
         link(rel='stylesheet', href='/css/landing.css')
 
-        body(class="yellowLightBackground")
-            #wrapper
-                #instructionsBlock(class="cyanDarkBackground")
+        body
+            .container
+                .jumbotron#maincontent
                     h1(id="instructions") Compare everyone's schedule at once to find the best time to meet.
+                hr
+                .container-fluid
+                    form(class="form" action="/event/create")
+                        .row
+                            div(class="col-sm-6 col-md-4")
+                                div(class="thumbnail selections")
+                                    .caption
+                                        h3 Select Type of Event
+                                        div(id="calendarTypeRadioButton", class="cyanMedBackground")
+                                            .radio
+                                                label
+                                                input(id="weeklyRadioSelection", type="radio", name="type", value="Weekly")
+                                                | Weekly
+                                            .radio
+                                                label
+                                                input(id="oneTimeRadioSelection", type="radio", name="type", value="One-Time")
+                                                | One Time
 
-                form(action="/create-event")
-                    div(id="calendarTypeRadioButton", class="cyanMedBackground")
-                        p Weekly
-                            input(id="weeklyRadioSelection", type="radio", name="type", value="Weekly")
-                        p One Time
-                            input(id="oneTimeRadioSelection", type="radio", name="type", value="One-Time")
+                            div(class="col-sm-6 col-md-4 collapse" id="range")
+                                div(class="thumbnail selections")
+                                    .caption
+                                        h3 Pick Range of Dates
+                                        .form-group
+                                            label(for="startDate") Start Date:
+                                                input(class="datepicker form-control" name="startDate")
+                                        .form-group
+                                            label(for="endDate") End Date:
+                                                input(class="datepicker form-control" name="endDate")
 
-                    #datepickerBlock(class="cyanDarkBackground")
-                        .datepickerContent
-                            #contentWrapper
-                                p.datepickerContent Start date:
-                                input(class="datepicker" name="startDate")
-                            #contentWrapper
-                                p.datepickerContent End date:
-                                input(class="datepicker" name="endDate")
-
-                    input(class="goButton" type="submit" value="Go!")
+                            div(class="col-sm-6 col-md-4" id="goButtonArea")
+                                input(class="goButton" type="submit" value="Create Your Event!" class="btn btn-primary", role="button")
