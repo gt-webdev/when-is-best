@@ -31,3 +31,43 @@
 {
     border:0px;
 }
+
+
+
+#content
+{
+    width:340px;
+    height:100%;
+    overflow:auto;
+}
+
+#contentWrapper
+{
+    width:310px;
+    overflow:hidden;
+    height:100%;
+}
+
+.sidebarText
+{
+    background:none;
+    border:0;
+    outline:none;
+    font-size:20px;
+    color:#555555;
+    opacity:0.8;
+    font-family: "Open Sans";
+    overflow: hidden;
+    resize: none;
+    margin:0;
+    width:300px;
+}
+
+#addEmail
+{
+    font-size:20px;
+    color:#555555;
+    opacity:0.8;
+    font-family: "Open Sans";
+    cursor:pointer;
+}

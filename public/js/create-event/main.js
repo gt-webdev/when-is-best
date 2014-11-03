@@ -99,4 +99,52 @@ jQuery(function($) {
 	$('#sendButton').click(function (event) {
 		services.post(event);
 	});
+    
+    //SIDEBAR TEXTBOXES AUTOSIZE AND AUTOFILL
+    $('.sidebarText').autosize();
+    
+    var cssNameFill = {"opacity":1,"color":"#000000"};
+    var cssNameEmpty = {"opacity":0.8,"color":"#555555"};
+    
+    $('.sidebarText').focus(textClick);
+    $('.sidebarText').blur(textBlur);
+    
+    function textClick() {
+        if (parseFloat($(this).css("opacity")) < 0.9) {
+            $(this).css(cssNameFill);
+            $(this).val("");
+        }   
+    }
+    
+    function textBlur() {
+        var elemId = $(this).attr('id');
+        var textValue = ""
+        switch(elemId)  {
+        case "name":
+            textValue = "your name";
+            break;
+        case "email":
+            textValue = "your email";
+            break;
+        case "title":
+            textValue = "event title";
+            break;
+        case "description":
+            textValue = "event description";
+            break;
+        case "emailInvite":
+            textValue = "invite email";
+            break;
+        }
+        if ($(this).val() == '') {
+            $(this).css(cssNameEmpty);
+            $(this).val(textValue);
+        }
+    }
+    
+    //preventing enter key
+    $('.sidebarText').keypress(function(event){
+        if (event.keyCode == 10 || event.keyCode == 13) 
+            event.preventDefault();
+    });
 });
