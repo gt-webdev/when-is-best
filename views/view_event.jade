@@ -10,7 +10,9 @@ html
         script(type="text/javascript").
 
             var _id = 0;
+            var _z_index = 110;
             var mouseY;
+
             function getTimeslotIndex (pixels, $block) {
                 return Math.round((pixels - $block.offset().top) / 32);
             }
@@ -26,6 +28,10 @@ html
             function getNewId () {
                 _id++;
                 return "timespan_" + _id;
+            }
+
+            function getZIndex () {
+                return _z_index++;
             }
 
             var test = false;
@@ -58,12 +64,14 @@ html
                     action = ACTION_RESIZE_TOP;
                     timespanManipulating = thisRef;
                     mousey = event.pageY;
+                    jQueryObject.css("z-index", getZIndex());
                     event.stopPropagation();
                 });
                 $bottomResizer.mousedown(function (event) {
                     action = ACTION_RESIZE_BOTTOM;
                     timespanManipulating = thisRef;
                     mousey = event.pageY;
+                    jQueryObject.css("z-index", getZIndex());
                     event.stopPropagation();
                 });
 
@@ -71,11 +79,13 @@ html
                     action = ACTION_MOVE;
                     timespanManipulating = thisRef;
                     mouseY = event.pageY;
+                    jQueryObject.css("z-index", getZIndex());
                     event.stopPropagation();
                 });
 
                 jQueryObject.css("top", getPixelOffset(startTime));
                 jQueryObject.css("height", getPixelInterval(startTime, endTime));
+                jQueryObject.css("z-index", getZIndex());
 
                 this.paint = function (y) {
                     var topOffset = jQueryObject.offset().top;
