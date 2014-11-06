@@ -1,15 +1,22 @@
 .timeslot
 {
-    height: 30px;
-    border: 1px solid #000;
+    height:6px;
     width:100px;
+    margin:0px;
+    border: 1px solid transparent;
+    font-size:10px;
+}
+
+.bottomBorder {
+    border-bottom: 1px solid #000;
+    vertical-align:bottom;
 }
 
 .dayBlock
 {
     width:102px;
-    margin-left:100px;
-    margin-top:100px;
+    margin-left:50px;
+    margin-top:20px;
     background-color:#EEE;
     position: relative;
     display:inline-block;
