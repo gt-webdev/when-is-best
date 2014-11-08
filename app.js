@@ -24,7 +24,7 @@ app.use(bodyParser.json());
       secret: '1234567890QWERTYfd',
       autoreconnect: true,
       resave: true,
-      saveUninitialized: true
+      saveUninitialized: true,
     }, function () {
         console.log("db connection open");
       }));
@@ -45,7 +45,8 @@ app.use(function(req,res,next){
 
 app.use('/',router);
 
-app.listen(config.port);
-console.log("Hey! You are running on port " + config.port);
+var server = app.listen(config.port, function() {
+    console.log("Listening on port " + config.port);
+});
 
 module.exports = app;
