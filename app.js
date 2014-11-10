@@ -14,7 +14,25 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'jade');
 app.use(bodyParser.json());
 
-//the ingredients for making cookies
+    //setUpMongoStore();
+
+//middleware function for router
+app.use(function(req,res,next){
+    
+    //setUpSessionVars();
+    
+    //move on to the next function
+    next();
+});
+
+app.use('/',router);
+
+var server = app.listen(config.port, function() {
+    console.log("Listening on port " + config.port);
+});
+
+function setUpMongoStore() {
+    //the ingredients for making cookies
     app.use(cookieparser());
     //create a session hooked up to mongodb
     app.use(session({
@@ -28,25 +46,15 @@ app.use(bodyParser.json());
     }, function () {
         console.log("db connection open");
       }));
+}
 
-//middleware function for router
-app.use(function(req,res,next){
-    
+function setUpSessionVars() {
     //if eventIndex hasn't been created in this session...
     if(!req.session.eventIndex) {
         //create an eventIndex and eventArray
         req.session.eventIndex = 0;
         req.session.eventArray = [];
     }
-    
-    //move on to the next function
-    next();
-});
-
-app.use('/',router);
-
-var server = app.listen(config.port, function() {
-    console.log("Listening on port " + config.port);
-});
+}
 
 module.exports = app;
