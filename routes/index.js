@@ -37,6 +37,10 @@ router.route('/event/create')
       if(err){
         console.log('posting error to DB');
       }
+      //I will add this event to the eventArray stored in our session
+        req.session.eventArray[req.session.eventIndex++] = req.body;
+        
+      //Add the event to the 'events' collection
       var newId = new ObjectID();
       req.body._id =  newId;
 
@@ -74,6 +78,11 @@ router.get('/mail', function(req, res) {
 
 router.get('/view-event', function(req, res) {
     res.render('view_event', {'moment' : moment});
+});
+
+//route to view a session's saved event in JSON form
+router.get("/history", function(req, res) {
+    res.end(JSON.stringify(req.session.eventArray));
 });
 
 module.exports = router;
