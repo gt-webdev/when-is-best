@@ -13,19 +13,17 @@ html
         script(type="text/javascript", src="/js/create-event/jquery.autosize.js")
         script(type="text/javascript", src="/js/create-event/jquery.autosize.min.js")
         script(type="text/javascript", src="/js/range_selection.js")
-            
+
     body(class="yellowLightBackground")
         #sidebar(class="cyanDarkBackground")
-            #contentWrapper
-                #content
-                    #hoursSelector
-                        mixin date("hoursSelector")
-                    #infoBlock
-                        textarea(name="name", id="name", class="sidebarText", maxlength="50") your name
-                        textarea(name="email", id="email", class="sidebarText", maxlength="40") your e-mail
-                        textarea(name="title", id="title", class="sidebarText", maxlength="75") event title
-                        textarea(name="description", id="description", class="sidebarText", maxlength="1000") event description
-                        textarea(id="emailInvite", class="sidebarText", maxlength="1000") invite email
+            #infoBlock
+                textarea(name="name", id="name", class="sidebarText", maxlength="50") your name
+                textarea(name="email", id="email", class="sidebarText", maxlength="40") your e-mail
+                textarea(name="title", id="title", class="sidebarText", maxlength="75") event title
+                textarea(name="description", id="description", class="sidebarText", maxlength="1000") event description
+                textarea(id="emailInvite", class="sidebarText", maxlength="1000") invite email
+            #hoursSelector
+                mixin date("hoursSelector")
         #wrapper
             table
                 tr

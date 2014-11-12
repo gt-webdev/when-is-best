@@ -8,7 +8,7 @@
 {
     position:fixed;
     height:100%;
-    width:350px;
+    width:400px;
     padding:20px;
     box-shadow: 3px 3px 5px #888;
 }
@@ -30,20 +30,6 @@
 .timeslot
 {
     border:0px;
-}
-
-#content
-{
-    width:340px;
-    height:100%;
-    overflow:auto;
-}
-
-#contentWrapper
-{
-    width:310px;
-    overflow:hidden;
-    height:100%;
 }
 
 .sidebarText
@@ -69,3 +55,19 @@
     font-family: "Open Sans";
     cursor:pointer;
 }
+
+#infoBlock {
+    width:300px;
+    display:inline-block;
+    vertical-align:top;
+}
+
+#hoursSelector
+{
+    width:100px;
+    display:inline-block;
+}
+    #hoursSelector #dayBlock_hoursSelector
+    {
+        margin:0px;
+    }
