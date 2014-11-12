@@ -1,16 +1,18 @@
-mixin date(dayIndex)
-    link(rel='stylesheet', href='/css/global.css')
-    link(rel='stylesheet', href="/css/timeslot.css")
+//- to use this mixin, add these to your jade file
 
-    script(type="text/javascript", src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js")
-    script(type="text/javascript", src="//code.jquery.com/ui/1.11.1/jquery-ui.js")
-    script(type="text/javascript", src="/js/range_selection.js")
+//- link(rel='stylesheet', href='/css/global.css')
+//- link(rel='stylesheet', href="/css/timeslot.css")
+
+//- script(type="text/javascript", src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js")
+//- script(type="text/javascript", src="//code.jquery.com/ui/1.11.1/jquery-ui.js")
+//- script(type="text/javascript", src="/js/range_selection.js")
+mixin date(dayIndex)
     div(class="dayBlock", id="dayBlock_" + dayIndex)
         - for (var j = 1; j < 97; j++)
             - var mod = j % 4;
             - if (mod == 1)
-                div(class="timeslot", wib-row=j, wib-col=dayIndex)= ((j / 4 - .25) + ":00")
+                div(id=Math.random(), class="timeslot", wib-row=j, wib-col=dayIndex)= ((j / 4 - .25) + ":00")
             - else if (mod == 0)
-                div(class="timeslot bottomBorder", wib-row=j, wib-col=dayIndex)=""
+                div(id=Math.random(), class="timeslot bottomBorder", wib-row=j, wib-col=dayIndex)=""
             - else
-                div(class="timeslot", wib-row=j, wib-col=dayIndex)=""
+                div(id=Math.random(), class="timeslot", wib-row=j, wib-col=dayIndex)=""

@@ -163,16 +163,17 @@ html
                     mouseY = event.pageY;
                 });
 
-                $(".timeslot").mousedown(function () {
-                    var timeslotId = getNewId();
-                    var $dayBlock = $("#dayBlock_" + $(this).attr("wib-col"));
-                    var startIndex = getTimeslotIndex(mouseY, $dayBlock);
-                    var timespan = new Timespan($dayBlock, startIndex,
-                            startIndex + 1, timeslotId);
-                    timespanManipulating = timespan;
-                    action = ACTION_PAINT;
-                    timespans.push(timespan);
-                });
+                //- $(".timeslot").mousedown(function () {
+                //-     console.log("mousedown");
+                //-     var timeslotId = getNewId();
+                //-     var $dayBlock = $("#dayBlock_" + $(this).attr("wib-col"));
+                //-     var startIndex = getTimeslotIndex(mouseY, $dayBlock);
+                //-     var timespan = new Timespan($dayBlock, startIndex,
+                //-             startIndex + 1, timeslotId);
+                //-     timespanManipulating = timespan;
+                //-     action = ACTION_PAINT;
+                //-     timespans.push(timespan);
+                //- });
 
                 $("body").mouseup(function () {
                     if ( timespanManipulating != null) {

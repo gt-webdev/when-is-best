@@ -91,16 +91,13 @@ function Timespan($dayBlock, startTime, endTime, identifier) {
         var change = jQueryObject.offset().top - mouseY;
         jQueryObject.css("top", "-=" + change);
         jQueryObject.height(jQueryObject.height() + change);
-        console.log("resizeTop");
     }
 
     this.resizeBottom = function (mouseY) {
-        console.log("resizeBottom");
         jQueryObject.height(mouseY - jQueryObject.offset().top);
     }
 
     this.move = function (change) {
-        console.log("move");
         jQueryObject.css("top", "+=" + change);
     }
 
@@ -156,7 +153,6 @@ function Timespan($dayBlock, startTime, endTime, identifier) {
             });
 
             $(".timeslot").mousedown(function () {
-                console.log("test");
                 var timeslotId = getNewId();
                 var $dayBlock = $("#dayBlock_" + $(this).attr("wib-col"));
 
@@ -166,14 +162,14 @@ function Timespan($dayBlock, startTime, endTime, identifier) {
                     timespanManipulating = timespan;
                     action = ACTION_PAINT;
                     timespans.push(timespan);
-                });
+            });
 
-                $("body").mouseup(function () {
-                    if ( timespanManipulating != null) {
-                        timespanManipulating.externalSnap();
-                    }
-                    action = ACTION_NONE;
-                    timespanManipulating = null;
-                });
+            $("body").mouseup(function () {
+                if ( timespanManipulating != null) {
+                    timespanManipulating.externalSnap();
+                }
+                action = ACTION_NONE;
+                timespanManipulating = null;
+            });
 
             });
