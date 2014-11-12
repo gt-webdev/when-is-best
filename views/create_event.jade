@@ -1,33 +1,29 @@
+include ./includes/date.jade
 html
     head
         link(rel="stylesheet", href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css")
         link(href="http://fonts.googleapis.com/css?family=Open+Sans", rel="stylesheet", type="text/css")
         link(rel='stylesheet', href='/css/global.css')
         link(rel='stylesheet', href='/css/create_event.css')
+        link(rel='stylesheet', href="/css/timeslot.css")
+
         script(type="text/javascript", src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js")
         script(type="text/javascript", src="//code.jquery.com/ui/1.11.1/jquery-ui.js")
         script(type="text/javascript", src="/js/create-event/main.js")
         script(type="text/javascript", src="/js/create-event/jquery.autosize.js")
         script(type="text/javascript", src="/js/create-event/jquery.autosize.min.js")
+        script(type="text/javascript", src="/js/range_selection.js")
+
     body(class="yellowLightBackground")
         #sidebar(class="cyanDarkBackground")
-            #contentWrapper
-                #content
-                    #hoursSelector
-                        p select hours (eventually)
-                    #infoBlock
-                        textarea(name="name", id="name", class="sidebarText", maxlength="50") your name
-                        textarea(name="email", id="email", class="sidebarText", maxlength="40") your e-mail
-                        textarea(name="title", id="title", class="sidebarText", maxlength="75") event title
-                        textarea(name="description", id="description", class="sidebarText", maxlength="1000") event description
-                        textarea(id="emailInvite", class="sidebarText", maxlength="1000") invite email
-            #hoursSelector
-                p select hours (eventually)
             #infoBlock
-                p get user info (eventually)
-            p #{weekly}
-            if !weekly
-                p dates: #{range.start} and #{range.end}
+                textarea(name="name", id="name", class="sidebarText", maxlength="50") your name
+                textarea(name="email", id="email", class="sidebarText", maxlength="40") your e-mail
+                textarea(name="title", id="title", class="sidebarText", maxlength="75") event title
+                textarea(name="description", id="description", class="sidebarText", maxlength="1000") event description
+                textarea(id="emailInvite", class="sidebarText", maxlength="1000") invite email
+            #hoursSelector
+                mixin date("hoursSelector")
         #wrapper
             table
                 tr
@@ -35,9 +31,5 @@ html
                     - for(var dayIndex = 0; dayIndex < 7; dayIndex++)
                         td(class="dayNameHeader")=DAYS[dayIndex]
                 if weekly
-                - for (var timeIndex = 0; timeIndex < 24; timeIndex++)
-                    tr(title=timeIndex)
-                    - for (var dayIndex = 0; dayIndex < 7; dayIndex++)
-                        td
-                            input(type="button", value=((timeIndex + 1) + ":00"), wib-day=dayIndex, wib-time=timeIndex, class="timeslot")
-            input(type="button", value="Send To Backend!", id="sendButton")
+                - for (var dayIndex = 0; dayIndex < 7; dayIndex++)
+                    mixin date(dayIndex)
