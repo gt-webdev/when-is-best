@@ -6,48 +6,49 @@ var express = require('express'),
     config = require('../config'),
     moment = require('moment');
 
-//Get an open meeting time for event with _id 
+// Get an open meeting time for event with _id 
 function getMeetingTime(id){
-  var potentialTimes;
-      day,
-      minutes,
-      startSlot,
-      numSlots;
+  var meetingTimes,
+      startDate,
+      endDate,
+      resDay,
+      resStartSlot,
+      resNumSlots;
 
   MongoClient.connect(config.mongo.url, function(err, db){
     if(err){
       console.log("db error");
     }
-    db.collection("events").findOne({"_id" : ObjectID(id)},{},function(e, event){
+    db.collection("events").findOne({"_id" : ObjectID(id)},{},function(e, _event){
+      startDate = moment(_event.start_date);
+      endDate = moment(_event.end_date);
 
-      // Initialize all potential timeslots of event to 0 (num of people busy during timeslot)
-      var daysDiff = parseInt(moment.duration(event.startDate.diff(event.endDate)).get("days"));
-      potentialTimes = new Array(daysDiff);
-
-      for (var i = 0; i < daysDiff; i++){
-        potentialTimes[i] = new Array(97);
+      // Creates 2d array of timeslots indexed by their date in between the event date range given
+      for (var i = startDate; i.isBefore(endDate); i.add("days",1)){
+        meetingTimes[i] = new Array(97);
         for (var j = 0; j < 97 ; j++){
-          potentialTimes[i][j] = 0;
+          meetingTimes[i][j] = 0;
         }
       }
 
-      event.yes_responses.forEach(function(reponse){
+      // Iterate through each yes reponse and adds its occupied times to the array; 
+      _event.yes_responses.forEach(function(response){
+        resDay = moment(response.date);
 
-        day = parseInt(moment.duration(event.startDate.diff(reponse.date)).get("days"));
         response.times.forEach(function(time){
-
-          minutes = parseInt(moment.duration(time.start.diff(time.end)).get("minutes"));  
-          startSlot = new moment(time.start).get("minutes") / 15;
-          numSlots = minutes / 15;
+          resStartSlot = new moment(time["start"]).get("minutes") / 15;
+          resNumSlots = parseInt(moment.duration(time["start"].diff(time.end)).get("minutes")) / 15;
 
           //for every time slot found increment the num of users busy for that slot(implement user name display later)
-          for (var i = startSlot; i < (startSlot + numSlots) ; i++){
-            potentialTimes[day][i]++;
+          for (var i = resStartSlot; i < (resStartSlot + resNumSlots) ; i++){
+            meetingTimes[resDay][i]++;
           }
         });
       }); 
     });
   });
+
+  return meetingTimes;
 }
 
 router.route("/create")
