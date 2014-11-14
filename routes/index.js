@@ -1,60 +1,16 @@
 var express = require('express');
 var router = express.Router();
-var mongodb = require('mongodb');
-var MongoClient = mongodb.MongoClient;
-var ObjectID = mongodb.ObjectID;
 var config = require('../config');
 var mandrill = require('mandrill-api/mandrill');
 var mandrill_client = new mandrill.Mandrill(config.mandrill_api_key);
 var moment = require('moment');
+var events = require("./events");
 
 router.get('/', function(req, res) {
   res.render('index', {});
 });
 
-// Requests for creating an event
-router.route('/event/create')
-  .get(function(req, res) {
-    // Parse out options passed in by landing page
-    var eventType = req.query.type;
-
-    if (eventType === "Weekly") {
-      res.render('create_event', { 'weekly': true });
-    }
-    else {
-      res.render('create_event',
-        { 'weekly': false,
-          'range': {
-            start: req.query.startDate,
-            end: req.query.endDate
-          }
-        });
-    }
-
-  })
-  .post(function(req, res) {
-    MongoClient.connect(config.mongo.url, function(err, db) {
-      if(err){
-        console.log('posting error to DB');
-      }
-      //I will add this event to the eventArray stored in our session
-        req.session.eventArray[req.session.eventIndex++] = req.body;
-        
-      //Add the event to the 'events' collection
-      var newId = new ObjectID();
-      req.body._id =  newId;
-
-      db.collection('events').insert(req.body,function(err){
-        if(err){
-          console.log('insert error to DB');
-        }
-        res.json({
-          "event-id": newId
-        });
-      });
-    });
-    console.log('POST successful');
-  });
+router.use('/event',events);
 
 router.get('/mail', function(req, res) {
     var message = {
