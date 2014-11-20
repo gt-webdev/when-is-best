@@ -103,48 +103,103 @@ jQuery(function($) {
     //SIDEBAR TEXTBOXES AUTOSIZE AND AUTOFILL
     $('.sidebarText').autosize();
     
-    var cssNameFill = {"opacity":1,"color":"#000000"};
-    var cssNameEmpty = {"opacity":0.8,"color":"#555555"};
-    
-    $('.sidebarText').focus(textClick);
-    $('.sidebarText').blur(textBlur);
-    
-    function textClick() {
-        if (parseFloat($(this).css("opacity")) < 0.9) {
-            $(this).css(cssNameFill);
-            $(this).val("");
-        }   
-    }
-    
-    function textBlur() {
-        var elemId = $(this).attr('id');
-        var textValue = ""
-        switch(elemId)  {
-        case "name":
-            textValue = "your name";
-            break;
-        case "email":
-            textValue = "your email";
-            break;
-        case "title":
-            textValue = "event title";
-            break;
-        case "description":
-            textValue = "event description";
-            break;
-        case "emailInvite":
-            textValue = "invite email";
-            break;
-        }
-        if ($(this).val() == '') {
-            $(this).css(cssNameEmpty);
-            $(this).val(textValue);
-        }
-    }
-    
     //preventing enter key
-    $('.sidebarText').keypress(function(event){
+    $('.sidebarText.nonInvite').keypress(function(event){
         if (event.keyCode == 10 || event.keyCode == 13) 
             event.preventDefault();
     });
+    
+    
+    function maxEmailInitedKey() {
+        var emailInvitedArray = [];
+        if ($('.emailInvited').length) {
+            emailInvitedArray = $('.emailInvited').map(function() {
+              return parseInt($(this).attr('data-emailInvited'));
+            });
+        }
+        if (emailInvitedArray.length) {
+            var max = Math.max.apply(Math, emailInvitedArray);
+            return max; 
+        }
+        else {
+            return 333;
+        } 
+    }
+    
+    function deleteByKey(deleteKey) {
+        $('p[data-emailInvited="' + deleteKey + '"]').remove();
+        $('div[data-closeButton="' + deleteKey + '"]').remove();
+    }
+    emailInvitedKey = maxEmailInitedKey() + 1;
+    
+    $('.closeButton').click(function(event) {
+        event.preventDefault;
+        var deleteKey = $(this).attr('data-closeButton');
+        deleteByKey(deleteKey);
+    });
+    
+    $('.sidebarText.invite').keypress(function(event){
+        if (event.keyCode == 32 || event.keyCode == 13 || event.keyCode == 188) {
+            event.preventDefault();   
+        }
+    });
+    
+    $('.sidebarText.invite').keydown(function(event){
+        if (event.keyCode == 32 || event.keyCode == 13 || event.keyCode == 188) {
+            event.preventDefault();
+            var emailAdd = $('#emailInvite').val();
+            var regexEmail = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}\b/;
+            var regexWhiteSpace = /[\s\t\v]/;
+            if (emailAdd == "") {
+                //do nothing
+            }
+            else if (regexEmail.test(emailAdd) && !regexWhiteSpace.test(emailAdd))   {
+                var emailInvited = $("<p class='emailInvited' data-emailInvited='" + emailInvitedKey + "'>" + emailAdd + "</p>");
+                var closeButton = $("<div class='closeButton' data-closeButton='" + emailInvitedKey + "'></div>");
+                emailInvited.appendTo('.emailList');
+                closeButton.appendTo('.emailList');
+                closeButton.click(function(event) {
+                    event.preventDefault;
+                    var deleteKey = $(this).attr('data-closeButton');
+                    deleteByKey(deleteKey);
+                });
+                $('#emailInvite').val('');
+                emailInvitedKey++;
+            }
+            else {
+                alert('Please enter a valid e-mail'); 
+            }
+        }
+        if (event.keyCode == 8) {
+            if (!$('#emailInvite').val().length) {
+                var deleteKey = maxEmailInitedKey();
+                deleteByKey(deleteKey);
+            }
+        }
+    });
+    
+    
+    function getData() {
+        var emailInvite = [];
+        var creatorName = $('#name').val();
+        var creatorEmail = $('#email').val();
+        var eventTitle = $('#title').val();
+        var eventDescription = $('#description').val();
+        $('.emailInvited').each(function () {
+            emailInvite.push($(this).html());
+        });
+        
+        var outJSON = {
+            "event_name": eventTitle,
+            "event_type": "recurring",
+            "proposed_dates": [
+            ],
+            "creator_name": creatorName,
+            "creator_email": creatorEmail,
+            "member_email": emailInvite,
+            "description": eventDescription
+        }
+        
+        return outJSON;
+    }
 });

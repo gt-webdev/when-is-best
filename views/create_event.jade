@@ -16,11 +16,12 @@ html
                     #hoursSelector
                         p select hours (eventually)
                     #infoBlock
-                        textarea(name="name", id="name", class="sidebarText", maxlength="50") your name
-                        textarea(name="email", id="email", class="sidebarText", maxlength="40") your e-mail
-                        textarea(name="title", id="title", class="sidebarText", maxlength="75") event title
-                        textarea(name="description", id="description", class="sidebarText", maxlength="1000") event description
-                        textarea(id="emailInvite", class="sidebarText", maxlength="1000") invite email
+                        textarea(name="name", id="name", class="sidebarText nonInvite", maxlength="50", placeholder="your name")
+                        textarea(name="email", id="email", class="sidebarText nonInvite", maxlength="40", placeholder="your e-mail")
+                        textarea(name="title", id="title", class="sidebarText nonInvite", maxlength="75", placeholder="event title")
+                        textarea(name="description", id="description", class="sidebarText nonInvite", maxlength="1000", placeholder="event description")
+                        .emailList
+                        textarea(id="emailInvite", class="sidebarText invite", maxlength="1000", placeholder="invite by e-mail")
             #hoursSelector
                 p select hours (eventually)
             #infoBlock

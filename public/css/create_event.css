@@ -54,7 +54,7 @@
     border:0;
     outline:none;
     font-size:20px;
-    color:#555555;
+    color:black;
     opacity:0.8;
     font-family: "Open Sans";
     overflow: hidden;
@@ -63,6 +63,27 @@
     width:300px;
 }
 
+.sidebarText::-webkit-input-placeholder
+{
+    color:#555555;   
+}
+
+.sidebarText:-moz-placeholder
+{
+    color:#555555;   
+}
+
+.sidebarText::-moz-placeholder
+{
+    color:#555555;   
+}
+
+.sidebarText:-ms-input-placeholder
+{
+    color:#555555;   
+}
+
+
 #addEmail
 {
     font-size:20px;
@@ -70,4 +91,37 @@
     opacity:0.8;
     font-family: "Open Sans";
     cursor:pointer;
+}
+
+.emailList
+{
+    width:310px;
+}
+
+.emailInvited
+{
+    margin-top:0;
+    margin-bottom:5px;
+    display:inline-block;
+    width:290px;
+    word-wrap:break-word;
+}
+
+.closeButton
+{
+    background: url('pictures/close-idle.png');
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    width:16px;
+    height:16px;
+    cursor:pointer;
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.closeButton:hover
+{
+    background: url('pictures/close-hover.png');
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
 }
