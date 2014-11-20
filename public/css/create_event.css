@@ -8,7 +8,7 @@
 {
     position:fixed;
     height:100%;
-    width:350px;
+    width:400px;
     padding:20px;
     box-shadow: 3px 3px 5px #888;
 }
@@ -30,22 +30,6 @@
 .timeslot
 {
     border:0px;
-}
-
-
-
-#content
-{
-    width:340px;
-    height:100%;
-    overflow:auto;
-}
-
-#contentWrapper
-{
-    width:310px;
-    overflow:hidden;
-    height:100%;
 }
 
 .sidebarText
@@ -93,9 +77,10 @@
     cursor:pointer;
 }
 
+
 .emailList
 {
-    width:310px;
+    width:290px;
 }
 
 .emailInvited
@@ -103,7 +88,7 @@
     margin-top:0;
     margin-bottom:5px;
     display:inline-block;
-    width:290px;
+    width:270px;
     word-wrap:break-word;
 }
 
@@ -124,4 +109,26 @@
     background: url('pictures/close-hover.png');
     background-size: 16px 16px;
     background-repeat: no-repeat;
+}
+
+#infoBlock {
+    width:300px;
+    display:inline-block;
+    vertical-align:top;
+}
+
+#hoursSelector
+{
+    width:100px;
+    display:inline-block;
+}
+
+#hoursSelector
+{
+    margin:0px;
+}
+
+#dayBlock_hoursSelector
+{
+    margin:0px;
 }

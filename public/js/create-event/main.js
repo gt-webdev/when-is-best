@@ -22,16 +22,7 @@ jQuery(function($) {
 		},
 
 		getJSON: function () {
-			var jsonTemplate = {
-				"event_name": "Birthday Party",
-				"event_type": "recurring",
-				"proposed_dates": [
-				],
-				"creator_name": "ME",
-				"creator_email": "trash@thegarbagecan.com",
-				"member_email": ["a@dsf.com", "b@dsf.com"],
-				"description": "this is a test"
-			}
+			var jsonTemplate = getData();
 
 			for (var j = 0; j < 7; j++) {
 				var dateJson = {
@@ -202,4 +193,8 @@ jQuery(function($) {
         
         return outJSON;
     }
+    
+    $("#sendButton").click(function() {
+        service.post();  
+    });
 });
