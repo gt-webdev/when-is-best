@@ -7,7 +7,7 @@ var express = require('express'),
     moment = require('moment');
 
 // Get an open meeting time for event with _id 
-function getMeetingTime(id){
+function getMeetingTimes(id){
   var meetingTimes,
       startDate,
       endDate,
@@ -16,7 +16,7 @@ function getMeetingTime(id){
       resNumSlots;
 
   MongoClient.connect(config.mongo.url, function(err, db){
-    if(err){
+    if (err){
       console.log("db error");
     }
     db.collection("events").findOne({"_id" : ObjectID(id)},{},function(e, _event){
@@ -27,22 +27,28 @@ function getMeetingTime(id){
       for (var i = startDate; i.isBefore(endDate); i.add("days",1)){
         meetingTimes[i] = new Array(97);
         for (var j = 0; j < 97 ; j++){
-          meetingTimes[i][j] = 0;
+          meetingTimes[i][j].numBusy = 0;
         }
       }
 
-      // Iterate through each yes reponse and adds its occupied times to the array; 
-      _event.yes_responses.forEach(function(response){
-        resDay = moment(response.date);
+      // Iterate through each yes response and adds its occupied times to the array; 
+      _event.responses.forEach(function(response){
+        response.days.forEach(function(day){
+          resDay = moment(day.date);
 
-        response.times.forEach(function(time){
-          resStartSlot = new moment(time["start"]).get("minutes") / 15;
-          resNumSlots = parseInt(moment.duration(time["start"].diff(time.end)).get("minutes")) / 15;
+          day.times.forEach(function(time){
+            resStartSlot = new moment(time["start"]).get("minutes") / 15;
+            resNumSlots = parseInt(moment.duration(time["start"].diff(time.end)).get("minutes")) / 15;
 
-          //for every time slot found increment the num of users busy for that slot(implement user name display later)
-          for (var i = resStartSlot; i < (resStartSlot + resNumSlots) ; i++){
-            meetingTimes[resDay][i]++;
-          }
+            //for every time slot found increment the num of users busy for that slot
+            for (var i = resStartSlot; i < (resStartSlot + resNumSlots) ; i++){
+              meetingTimes[resDay][i].numBusy++;
+              meetingTimes[resDay][i].people.push({
+                name: response["name"],
+                availibility: time.available
+              });
+            }
+          }); 
         });
       }); 
     });
