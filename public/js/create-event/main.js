@@ -193,8 +193,10 @@ jQuery(function($) {
         
         return outJSON;
     }
-    
-    $("#sendButton").click(function() {
-        service.post();  
+
+    //preventing enter key
+    $('.sidebarText').keypress(function(event){
+        if (event.keyCode == 10 || event.keyCode == 13) 
+            event.preventDefault();
     });
 });
